@@ -2,6 +2,8 @@ package com.java.finalproject.final_project.model;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.URL;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +24,8 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min = 10, max = 20, message = "name must have min: 4 char and max: 20")
-    @Column(nullable = false, length = 20)
+    
+    @Column(nullable = false)
     @NotBlank
     private String name;
 
@@ -31,15 +33,16 @@ public class Recipe {
     private String description;
 
     @NotBlank
+    @URL
     private String imgUrl;
 
     @ManyToMany
     @JoinTable(name = "ingredient_recipe", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
-    @ManyToMany
-    @JoinTable(name = "Instruction_recipe", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "instruction_id"))
-    private List<Instruction> instructions;
+    // @ManyToMany
+    // @JoinTable(name = "Instruction_recipe", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "instruction_id"))
+    // private List<Instruction> instructions;
 
 
     public Integer getId() {
@@ -82,13 +85,13 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public List<Instruction> getInstructions() {
-        return this.instructions;
-    }
+    // public List<Instruction> getInstructions() {
+    //     return this.instructions;
+    // }
 
-    public void setInstructions(List<Instruction> instructions) {
-        this.instructions = instructions;
-    }
+    // public void setInstructions(List<Instruction> instructions) {
+    //     this.instructions = instructions;
+    // }
 
 
 }
