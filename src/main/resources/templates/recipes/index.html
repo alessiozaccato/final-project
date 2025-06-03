@@ -21,16 +21,16 @@
             <div class="container">
                 <form th:action="@{/recipes/search}">
                     <div class="input-group">
-                        <input placeholder="type recipes to search the recipe" class="form-control" type="text" name="name"
-                            required>
+                        <input placeholder="type recipes to search the recipe" class="form-control" type="text"
+                            name="name" required>
                     </div>
                 </form>
                 <h3 th:text="'Ciao ' + ${username}"></h3>
                 <h1 class="my-4">Recipes: </h1>
                 <div class="row" th:if="${recipes.size() > 0}">
                     <div th:each="recipe : ${recipes}" th:object="${recipe}" class="col-md-4 mb-4">
-                        <div class="card" style="width: 100%;">
-                            <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta">
+                        <div class="card h-100" style="width: 100%;">
+                            <img th:src="*{imgUrl}" class="card-img-top w-75" alt="foto ricetta">
                             <div class="card-body">
                                 <h5 class="card-title" th:text="|Recipe:*{name}|"></h5>
                                 <a th:href="@{recipes + '/' +*{id}}" class="btn btn-primary">go to the recipe</a>
