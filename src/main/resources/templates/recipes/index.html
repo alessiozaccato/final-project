@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<th:block th:replace="~{fragments/starter::thymeleafThema}"></th:block>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <th:block th:replace="~{fragments/starter::style}"></th:block>
+
+
+
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/navbar::navbar}"></th:block>
+
+    <main>
+        <section>
+            <div class="container">
+                <form th:action="@{/recipes/search}">
+                    <div class="input-group">
+                        <input placeholder="type recipes to search the recipe" class="form-control" type="text" name="name"
+                            required>
+                    </div>
+                </form>
+                <h3 th:text="'Ciao ' + ${username}"></h3>
+                <h1 class="my-4">Recipes: </h1>
+                <div class="row" th:if="${recipes.size() > 0}">
+                    <div th:each="recipe : ${recipes}" th:object="${recipe}" class="col-md-4 mb-4">
+                        <div class="card" style="width: 100%;">
+                            <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="|Recipe:*{name}|"></h5>
+                                <a th:href="@{recipes + '/' +*{id}}" class="btn btn-primary">go to the recipe</a>
+                                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{recipes/edit/{id}(id=*{id})}"
+                                    class="btn btn-success">edit recipe</a>
+                                <!-- <a th:href="@{pizzas/{id}/specialOffer(id=*{id})}" class="btn btn-success">Offerta pizza</a> -->
+                                <form th:action="@{recipes/delete/{id}(id=${recipe.id})}" method="post">
+                                    <button sec:authorize="hasAuthority('ADMIN')" type="submit"
+                                        class="btn btn-danger">delete recipe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+</body>
+
+</html>

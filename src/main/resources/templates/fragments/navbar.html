@@ -13,11 +13,11 @@
         <nav class="navbar navbar-expand navbar-light ">
             <div class="nav navbar-nav">
                 <a th:text="Home" class="nav-item nav-link active" th:href="@{'/'}" aria-current="page"></a>
-                <a th:text="recipies" class="nav-item nav-link" th:href="@{'/recipies'}"></a>
+                <a th:text="recipes" class="nav-item nav-link" th:href="@{'/recipes'}"></a>
                 <a sec:authorize="hasAuthority('ADMIN')" th:text="ingredients" class="nav-item nav-link"
                     th:href="@{'/ingredients'}"></a>
                 <a sec:authorize="hasAuthority('ADMIN')" th:text="|create recipe|" class="nav-item nav-link"
-                    th:href="@{'/pizzas/create'}"></a>
+                    th:href="@{'/recipes/create'}"></a>
                 <a sec:authorize="hasAuthority('ADMIN')" th:text="|create ingredients|" class="nav-item nav-link"
                     th:href="@{/ingredients/create}"></a>
 
