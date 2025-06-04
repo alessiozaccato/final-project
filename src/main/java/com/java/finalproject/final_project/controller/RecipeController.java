@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.finalproject.final_project.model.Recipe;
-import com.java.finalproject.final_project.repositories.IngredientRepository;
+import com.java.finalproject.final_project.service.IngredientService;
 import com.java.finalproject.final_project.service.RecipeService;
 
 import jakarta.validation.Valid;
@@ -30,7 +30,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @Autowired
-    private IngredientRepository ingredientRepository;
+    private IngredientService ingredientService;
 
     @GetMapping
     public String index(Authentication authentication, Model model) {
@@ -58,14 +58,14 @@ public class RecipeController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("recipe", new Recipe());
-        model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("ingredients", ingredientService.findAll());
         return "recipes/create";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("recipe") Recipe formRecipe, BindingResult bindingResult,Model model ) {
         if(bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", ingredientRepository.findAll());
+            model.addAttribute("ingredients", ingredientService.findAll());
 
             return "recipes/create";
         }
@@ -79,7 +79,7 @@ public class RecipeController {
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("recipe", recipeService.getById(id));
         model.addAttribute("edit", true);
-        model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("ingredients", ingredientService.findAll());
 
         return "recipes/create";
     }
@@ -87,7 +87,7 @@ public class RecipeController {
     @PostMapping("/edit/{id}")
     public String update(@Valid @ModelAttribute("recipe") Recipe formRecipe, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
-            model.addAttribute("ingredients", ingredientRepository.findAll());
+            model.addAttribute("ingredients", ingredientService.findAll());
 
             return "recipes/create";
         }
@@ -99,11 +99,11 @@ public class RecipeController {
 
     @PostMapping("delete/{id}")
     public String delete(@PathVariable Integer id){
-        Recipe recipe= recipeService.getById(id);
+        // Recipe recipe= recipeService.getById(id);
 
-        recipeService.delete(recipe);
+        recipeService.deleteById(id);
 
-        return "redirect:/recipe";
+        return "redirect:/recipes";
     }    
 
 
