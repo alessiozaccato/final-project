@@ -14,12 +14,9 @@
             <div class="nav navbar-nav">
                 <a th:text="Home" class="nav-item nav-link active" th:href="@{'/'}" aria-current="page"></a>
                 <a th:text="recipes" class="nav-item nav-link" th:href="@{'/recipes'}"></a>
-                <a sec:authorize="hasAuthority('ADMIN')" th:text="ingredients" class="nav-item nav-link"
-                    th:href="@{'/ingredients'}"></a>
-                <a sec:authorize="hasAuthority('ADMIN')" th:text="|create recipe|" class="nav-item nav-link"
-                    th:href="@{'/recipes/create'}"></a>
-                <a sec:authorize="hasAuthority('ADMIN')" th:text="|create ingredients|" class="nav-item nav-link"
-                    th:href="@{/ingredients/create}"></a>
+                <a th:text="ingredients" class="nav-item nav-link" th:href="@{'/ingredients'}"></a>
+                <a th:text="|create recipe|" class="nav-item nav-link" th:href="@{'/recipes/create'}"></a>
+                <a th:text="|create ingredients|" class="nav-item nav-link" th:href="@{/ingredients/create}"></a>
 
             </div>
             <div>

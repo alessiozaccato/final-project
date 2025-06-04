@@ -40,11 +40,6 @@ public class Recipe {
     @JoinTable(name = "ingredient_recipe", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredients;
 
-    // @ManyToMany
-    // @JoinTable(name = "Instruction_recipe", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "instruction_id"))
-    // private List<Instruction> instructions;
-
-
     public Integer getId() {
         return this.id;
     }
@@ -85,13 +80,7 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    // public List<Instruction> getInstructions() {
-    //     return this.instructions;
-    // }
-
-    // public void setInstructions(List<Instruction> instructions) {
-    //     this.instructions = instructions;
-    // }
+    
 
 
 }
