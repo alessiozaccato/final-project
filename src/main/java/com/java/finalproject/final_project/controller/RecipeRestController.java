@@ -23,12 +23,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-@RequestMapping("/api/recipes")
 @CrossOrigin
+@RequestMapping("/api/recipes")
+
 public class RecipeRestController {
 
     @Autowired
-    private  RecipeService RecipeService;
+    private RecipeService RecipeService;
 
     @GetMapping
     public List<Recipe> index() {
