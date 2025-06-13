@@ -10,20 +10,20 @@
 <body>
 
     <th:block th:fragment="navbar">
-        <nav class="navbar navbar-expand navbar-light ">
-            <div class="nav navbar-nav">
-                <a th:text="Home" class="nav-item nav-link active" th:href="@{'/'}" aria-current="page"></a>
-                <a th:text="recipes" class="nav-item nav-link" th:href="@{'/recipes'}"></a>
-                <a th:text="ingredients" class="nav-item nav-link" th:href="@{'/ingredients'}"></a>
-                <a th:text="|create recipe|" class="nav-item nav-link" th:href="@{'/recipes/create'}"></a>
-                <a th:text="|create ingredients|" class="nav-item nav-link" th:href="@{/ingredients/create}"></a>
-
-            </div>
-            <div>
-                Logged User: <span sec:authentication="name"></span>
-                Roles: <span sec:authentication="principal.authorities"></span>
-                <a class="btn btn-primary" href="/logout">Sign out</a>
-
+        <nav class="navbar navbar-expand navbar-light">
+            <div class="container-fluid">
+                <div class="nav navbar-nav">
+                    <a th:text="Home" class="nav-item nav-link active" th:href="@{'/'}" aria-current="page"></a>
+                    <a th:text="recipes" class="nav-item nav-link" th:href="@{'/recipes'}"></a>
+                    <a th:text="ingredients" class="nav-item nav-link" th:href="@{'/ingredients'}"></a>
+                    <a th:text="|create recipe|" class="nav-item nav-link" th:href="@{'/recipes/create'}"></a>
+                    <a th:text="|create ingredients|" class="nav-item nav-link" th:href="@{/ingredients/create}"></a>
+                </div>
+                <div class="ms-auto d-flex align-items-center gap-2">
+                    <span>Logged User: <span sec:authentication="name"></span></span>
+                    <span>Roles: <span sec:authentication="principal.authorities"></span></span>
+                    <a class="btn btn-primary ms-2" href="/logout">Sign out</a>
+                </div>
             </div>
         </nav>
 

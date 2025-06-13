@@ -18,23 +18,20 @@
 
     <main>
         <section>
-            <div class="container " th:object="${ingredient}">
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 100%;">
-
+            <div class="container d-flex justify-content-center align-items-center min-vh-100"
+                th:object="${ingredient}">
+                <div class="col-md-6 col-lg-5">
+                    <div class="card shadow w-100">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="|Ingredient:*{name}|"></h5>
-                            <a th:href="@{'/ingredients'}" class="btn btn-primary">back to ingredients</a>
+                            <h5 class="card-title text-center mb-4" th:text="|Ingredient: *{name}|"></h5>
+                            <div class="d-flex justify-content-center">
+                                <a th:href="@{'/ingredients'}" class="btn btn-primary">Back to ingredients</a>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         </section>
-
-
     </main>
 
 </body>
