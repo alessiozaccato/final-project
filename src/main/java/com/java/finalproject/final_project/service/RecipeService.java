@@ -3,12 +3,15 @@ package com.java.finalproject.final_project.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.java.finalproject.final_project.model.Recipe;
 import com.java.finalproject.final_project.repositories.RecipeRepository;
+
+
 
 @Service
 public class RecipeService {
@@ -25,7 +28,8 @@ public class RecipeService {
     }
 
      public List<Recipe> findByName(String name){
-        return recipeRepository.findByNameContaining(name);
+        List<Recipe> recipeList= recipeRepository.findByNameContaining(name);
+        return recipeList ;
     }
 
     public Optional<Recipe> findById(Integer id){
