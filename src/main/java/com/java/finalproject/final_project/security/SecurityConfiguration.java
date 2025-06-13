@@ -21,7 +21,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/ingredients/create", "/ingredients/edit").hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/recipes/create", "/recipes/edit").hasAuthority("ADMIN")
                 .requestMatchers("/ingredients", "/ingredients/**").hasAuthority("ADMIN")
-                .requestMatchers("/", "/recipes", "/recipes/**").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers("/", "/recipes", "/recipes/**").hasAuthority("ADMIN")
                 .requestMatchers("/**").permitAll()
                 .and().formLogin()
                 .and().logout()

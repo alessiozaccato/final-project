@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title th:text="${recipe.name}"></title>
 
     <th:block th:replace="~{fragments/starter::style}"></th:block>
 
@@ -18,28 +18,31 @@
 
     <main>
         <section>
-            <div class="container " th:object="${recipe}">
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 100%;">
-                        <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta">
+            <div class="container d-flex justify-content-center align-items-center min-vh-100" th:object="${recipe}">
+                <div class="col-md-6 col-lg-5">
+                    <div class="card shadow w-100">
+                        <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta"
+                            style="height: 260px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title" th:text="|Recipe:*{name}|"></h5>
-                            <p class="card-text" th:text="|description: *{description}|"></p>
-                            <div th:if="${recipe.getIngredients().size>0}">
-                                <ul>
-                                    <li th:each="ingredient : *{ingredients}" th:text="${ingredient.name}"></li>
+                            <h5 class="card-title text-center mb-3" th:text="*{name}"></h5>
+                            <p class="card-text text-center mb-4" th:text="*{description}"></p>
+                            <div th:if="${recipe.getIngredients().size>0}" class="mb-3">
+                                <h6 class="text-center">Ingredienti:</h6>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item text-center" th:each="ingredient : *{ingredients}"
+                                        th:text="${ingredient.name}"></li>
                                 </ul>
                             </div>
-                            <a th:href="@{'/'}" class="btn btn-primary">torna alla home</a>
+                            <div th:unless="${recipe.getIngredients().size>0}"
+                                class="alert alert-warning text-center mb-3">
+                                there are no ingredients
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <a th:href="@{'/recipes'}" class="btn btn-primary">Back to recipes</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="alert alert-warning" th:unless="${recipe.getIngredients().size>0}">
-                        there are no ingredients
-                    </div>
                 </div>
-               
-
-
             </div>
         </section>
 
