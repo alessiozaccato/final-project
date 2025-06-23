@@ -7,6 +7,8 @@
     <title>Recipes</title>
 
     <th:block th:replace="~{fragments/starter::style}"></th:block>
+    <th:block th:replace="~{fragments/starter::favIcon}"></th:block>
+
 
 
 
@@ -26,29 +28,37 @@
                     </div>
                 </form>
                 <h3 class="mt-3" th:text="'Ciao ' + ${username}"></h3>
-                <h1 class="my-4">Recipes: </h1>
-                <div class="row g-4" th:if="${recipes.size() > 0}">
-                    <div th:each="recipe : ${recipes}" th:object="${recipe}"
-                        class="col-md-4 d-flex align-items-stretch">
-                        <div class="card h-100 w-100 shadow-sm">
-                            <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta"
-                                style="height: 220px; object-fit: cover;">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title mb-3 text-center" th:text="*{name}"></h5>
-                                <div class="mt-auto d-flex flex-row gap-2">
-                                    <a th:href="@{recipes + '/' +*{id}}" class="btn btn-primary flex-fill">Go to the
-                                        recipe</a>
-                                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{recipes/edit/{id}(id=*{id})}"
-                                        class="btn btn-success flex-fill">Edit</a>
-                                    <form th:action="@{recipes/delete/{id}(id=${recipe.id})}" method="post"
-                                        class="d-inline flex-fill">
-                                        <button sec:authorize="hasAuthority('ADMIN')" type="submit"
-                                            class="btn btn-danger w-100">Delete</button>
-                                    </form>
+                <div th:if="${recipes.size() > 0}">
+
+                    <h1 class="my-4">Recipes: </h1>
+                    <div class="row g-4" th:if="${recipes.size() > 0}">
+                        <div th:each="recipe : ${recipes}" th:object="${recipe}"
+                            class="col-md-4 d-flex align-items-stretch">
+                            <div class="card h-100 w-100 shadow-sm">
+                                <img th:src="*{imgUrl}" class="card-img-top" alt="foto ricetta"
+                                    style="height: 220px; object-fit: cover;">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title mb-3 text-center" th:text="*{name}"></h5>
+                                    <div class="mt-auto d-flex flex-row gap-2">
+                                        <a th:href="@{'/recipes' + '/' +*{id}}" class="btn btn-primary flex-fill">Go to
+                                            the
+                                            recipe</a>
+                                        <a sec:authorize="hasAuthority('ADMIN')"
+                                            th:href="@{/recipes/edit/{id}(id=*{id})}"
+                                            class="btn btn-success flex-fill">Edit</a>
+                                        <form th:action="@{recipes/delete/{id}(id=${recipe.id})}" method="post"
+                                            class="d-inline flex-fill">
+                                            <button sec:authorize="hasAuthority('ADMIN')" type="submit"
+                                                class="btn btn-danger w-100">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div th:unless="${recipes.size() > 0}">
+                    <h1 class="mt-3 text-capitalize">no recipes available for this name</h1>
                 </div>
             </div>
         </section>
