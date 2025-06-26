@@ -59,7 +59,7 @@ public class RecipeController {
     public String create(Model model) {
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("ingredients", ingredientService.findAll());
-        return "recipes/create";
+        return "recipes/create-edit";
     }
 
     @PostMapping("/create")
@@ -67,7 +67,7 @@ public class RecipeController {
         if(bindingResult.hasErrors()) {
             model.addAttribute("ingredients", ingredientService.findAll());
 
-            return "recipes/create";
+            return "recipes/create-edit";
         }
 
         recipeService.create(formRecipe);
@@ -81,7 +81,7 @@ public class RecipeController {
         model.addAttribute("edit", true);
         model.addAttribute("ingredients", ingredientService.findAll());
 
-        return "recipes/create";
+        return "recipes/create-edit";
     }
 
     @PostMapping("/edit/{id}")
@@ -89,7 +89,7 @@ public class RecipeController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("ingredients", ingredientService.findAll());
 
-            return "recipes/create";
+            return "recipes/create-edit";
         }
 
         recipeService.update(formRecipe);

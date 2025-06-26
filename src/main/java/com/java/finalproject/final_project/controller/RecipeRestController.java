@@ -31,23 +31,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class RecipeRestController {
 
     @Autowired
-    private RecipeService RecipeService;
+    private RecipeService recipeService;
 
     @GetMapping
     public List<Recipe> index() {
-        List<Recipe> recipes = RecipeService.findAll();
+        List<Recipe> recipes = recipeService.findAll();
         return recipes;
     }
 
     @GetMapping("/sortByName")
     public List<Recipe> indexByName() {
-        List<Recipe> recipes = RecipeService.findAllByName();
+        List<Recipe> recipes = recipeService.findAllByName();
         return recipes;
     }
 
     @GetMapping("/search")
 public ResponseEntity<List<Recipe>> searchByName(@RequestParam String name) {
-    List<Recipe> recipes = RecipeService.findByName(name);
+    List<Recipe> recipes = recipeService.findByName(name);
     if (recipes.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -57,7 +57,7 @@ public ResponseEntity<List<Recipe>> searchByName(@RequestParam String name) {
 
     @GetMapping("/{id}")
     public ResponseEntity<Recipe> show(@PathVariable Integer id) {
-        Optional<Recipe> recipesAttempt = RecipeService.findById(id);
+        Optional<Recipe> recipesAttempt = recipeService.findById(id);
         if (recipesAttempt.isEmpty()) {
             return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
         }
@@ -66,26 +66,26 @@ public ResponseEntity<List<Recipe>> searchByName(@RequestParam String name) {
 
     @PostMapping("/create")
     public ResponseEntity<Recipe> store(@Valid @RequestBody Recipe recipe) {
-        return new ResponseEntity<Recipe>(RecipeService.create(recipe), HttpStatus.OK);
+        return new ResponseEntity<Recipe>(recipeService.create(recipe), HttpStatus.OK);
     }
 
     @PutMapping("update/{id}")
     public ResponseEntity<Recipe> patch(@PathVariable Integer id, @Valid @RequestBody Recipe recipe) {
-        if (!RecipeService.existsById(id)) {
+        if (!recipeService.existsById(id)) {
             return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
         }
         recipe.setId(id);
-        return new ResponseEntity<Recipe>(RecipeService.update(recipe), HttpStatus.OK);
+        return new ResponseEntity<Recipe>(recipeService.update(recipe), HttpStatus.OK);
 
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Recipe> delete(@PathVariable Integer id) {
-        if (!RecipeService.existsById(id)) {
+        if (!recipeService.existsById(id)) {
             return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
 
         }
-        RecipeService.deleteById(id);
+        recipeService.deleteById(id);
         return new ResponseEntity<Recipe>(HttpStatus.OK);
 
     }
