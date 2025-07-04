@@ -26,14 +26,14 @@ public class Recipe {
 
     
     @Column(nullable = false)
-    @NotBlank
+    @NotBlank(message = "name must be defined")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "description required")
     private String description;
 
-    @NotBlank
-    @URL
+    @NotBlank(message = "image must be defined")
+    @URL(message = "must be an valid URL ")
     private String imgUrl;
 
     @ManyToMany

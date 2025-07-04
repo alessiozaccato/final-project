@@ -20,7 +20,7 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+    @NotBlank(message = "name must be defined")
     private String name;
 
     @JsonBackReference

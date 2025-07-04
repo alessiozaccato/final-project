@@ -39,11 +39,11 @@ public class RecipeRestController {
         return recipes;
     }
 
-    @GetMapping("/sortByName")
-    public List<Recipe> indexByName() {
-        List<Recipe> recipes = recipeService.findAllByName();
-        return recipes;
-    }
+    // @GetMapping("/sortByName")
+    // public List<Recipe> indexByName() {
+    //     List<Recipe> recipes = recipeService.findAllByName();
+    //     return recipes;
+    // }
 
     @GetMapping("/search")
 public ResponseEntity<List<Recipe>> searchByName(@RequestParam String name) {
